@@ -1,6 +1,8 @@
 import 'package:desafio_bus2/core/api/dio_http_client.dart';
 import 'package:desafio_bus2/core/api/http_client.dart';
 import 'package:desafio_bus2/core/database/hive_local_storage.dart';
+import 'package:desafio_bus2/data/repositories/random_person_repository.dart';
+import 'package:desafio_bus2/data/repositories/random_person_repository_impl.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,7 +14,15 @@ void main() async {
 
   runApp(
     MultiProvider(
-      providers: [Provider<HttpClient>(create: (_) => DioHttpClient())],
+      providers: [
+        Provider<HttpClient>(create: (_) => DioHttpClient()),
+        Provider<RandomPersonRepository>(
+          create: (context) => RandomPersonRepositoryImpl(
+            storage: storage,
+            httpClient: context.read<HttpClient>(),
+          ),
+        ),
+      ],
       child: MyApp(),
     ),
   );
