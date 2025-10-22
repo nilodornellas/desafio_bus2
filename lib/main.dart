@@ -1,7 +1,21 @@
+import 'package:desafio_bus2/core/api/dio_http_client.dart';
+import 'package:desafio_bus2/core/api/http_client.dart';
+import 'package:desafio_bus2/core/database/hive_local_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final storage = HiveLocalStorage();
+  await storage.init();
+
+  runApp(
+    MultiProvider(
+      providers: [Provider<HttpClient>(create: (_) => DioHttpClient())],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
