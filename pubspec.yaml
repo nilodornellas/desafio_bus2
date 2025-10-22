@@ -10,8 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.8
   dio: ^5.9.0
+  lucide_icons: ^0.257.0
   path_provider: ^2.1.5
   provider: ^6.1.5+1
   hive: ^2.2.3

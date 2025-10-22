@@ -1,5 +1,6 @@
 import 'package:desafio_bus2/pages/person_list/person_list_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:lucide_icons/lucide_icons.dart';
 import 'package:provider/provider.dart';
 
 class PersonListPage extends StatefulWidget {
@@ -43,6 +44,10 @@ class _PersonListPageState extends State<PersonListPage> {
                 );
               },
             ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(LucideIcons.database),
+      ),
     );
   }
 }
