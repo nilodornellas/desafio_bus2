@@ -11,9 +11,11 @@ class DioHttpClient implements HttpClient {
           Dio(
             BaseOptions(
               baseUrl: 'https://randomuser.me/api/',
-              contentType: 'application/json',
               connectTimeout: const Duration(seconds: 10),
               receiveTimeout: const Duration(seconds: 10),
+              responseType: ResponseType.json,
+              contentType: 'application/json',
+              headers: {'Accept': 'application/json'},
             ),
           );
 

@@ -27,7 +27,7 @@ void main() async {
         ChangeNotifierProvider<PersonListViewModel>(
           create: (context) => PersonListViewModel(
             repository: context.read<RandomPersonRepository>(),
-          )..getRandomPerson(),
+          ),
         ),
       ],
       child: MyApp(),

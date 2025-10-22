@@ -1,6 +1,7 @@
 import 'package:desafio_bus2/data/models/random_person.dart';
 import 'package:desafio_bus2/data/repositories/random_person_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 class PersonListViewModel extends ChangeNotifier {
   final RandomPersonRepository _repository;
@@ -8,24 +9,59 @@ class PersonListViewModel extends ChangeNotifier {
   PersonListViewModel({required RandomPersonRepository repository})
     : _repository = repository;
 
+  late final Ticker _ticker;
+  Duration? _lastElapsed = Duration.zero;
+
   List<RandomPerson> _people = [];
   List<RandomPerson> get people => _people;
 
-  bool _isLoading = false;
-  bool get isLoading => _isLoading;
+  bool _initialLoading = true;
+  bool get isLoadingInitial => _initialLoading;
+
+  bool _isFetching = false;
+  Duration _accumulated = Duration.zero;
+
+  Future<void> init() async {
+    try {
+      await getRandomPerson();
+
+      _ticker = Ticker(_onTick)..start();
+    } finally {
+      _initialLoading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<void> _onTick(Duration elapsed) async {
+    final delta = elapsed - (_lastElapsed ?? Duration.zero);
+    _lastElapsed = elapsed;
+    _accumulated += delta;
+
+    if (_accumulated.inSeconds >= 5 && !_isFetching) {
+      _accumulated = Duration.zero;
+
+      await getRandomPerson();
+    }
+  }
 
   Future<void> getRandomPerson() async {
-    _isLoading = true;
-    notifyListeners();
-
+    _isFetching = true;
     try {
       final newPerson = await _repository.getOne();
-      _people.add(newPerson);
+      if (newPerson.id.name != null) {
+        _people = [..._people, newPerson];
+      }
     } catch (e) {
       // Handle error appropriately, e.g., log or show a message
+    } finally {
+      _isFetching = false;
+      notifyListeners();
     }
+  }
 
-    _isLoading = false;
-    notifyListeners();
+  @override
+  void dispose() {
+    _ticker.dispose();
+    super.dispose();
   }
 }

@@ -24,7 +24,7 @@ class RandomPersonRepositoryImpl implements RandomPersonRepository {
   @override
   Future<RandomPerson> getOne() async {
     try {
-      final response = await _httpClient.get('https://randomuser.me/api/');
+      final response = await _httpClient.get('');
       final result = response['results'][0];
       final randomPerson = RandomPerson.fromMap(result);
 

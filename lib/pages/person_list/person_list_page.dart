@@ -2,8 +2,23 @@ import 'package:desafio_bus2/pages/person_list/person_list_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class PersonListPage extends StatelessWidget {
+class PersonListPage extends StatefulWidget {
   const PersonListPage({super.key});
+
+  @override
+  State<PersonListPage> createState() => _PersonListPageState();
+}
+
+class _PersonListPageState extends State<PersonListPage> {
+  @override
+  void initState() {
+    super.initState();
+
+    Future.microtask(() {
+      if (!mounted) return;
+      context.read<PersonListViewModel>().init();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +26,7 @@ class PersonListPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: Text('Lista de Pessoas')),
-      body: personListViewModel.isLoading
+      body: personListViewModel.isLoadingInitial
           ? Center(child: CircularProgressIndicator())
           : ListView.builder(
               itemCount: personListViewModel.people.length,

@@ -59,7 +59,7 @@ class RandomPerson {
 }
 
 class PersonId {
-  final String name;
+  final String? name;
   final String value;
 
   PersonId({required this.name, required this.value});
@@ -69,7 +69,10 @@ class PersonId {
   }
 
   factory PersonId.fromMap(Map<String, dynamic> map) {
-    return PersonId(name: map['name'] as String, value: map['value'] as String);
+    return PersonId(
+      name: map['name'] as String?,
+      value: map['value'] as String,
+    );
   }
 
   String toJson() => json.encode(toMap());
