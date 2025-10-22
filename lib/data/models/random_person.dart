@@ -6,9 +6,8 @@ import 'package:desafio_bus2/data/models/location.dart';
 import 'package:desafio_bus2/data/models/picture.dart';
 
 class RandomPerson {
-  final String id;
-  final String firstName;
-  final String lastName;
+  final PersonId id;
+  final PersonName name;
   final Location location;
   final String email;
   final Gender gender;
@@ -18,8 +17,7 @@ class RandomPerson {
 
   RandomPerson({
     required this.id,
-    required this.firstName,
-    required this.lastName,
+    required this.name,
     required this.location,
     required this.email,
     required this.gender,
@@ -30,9 +28,8 @@ class RandomPerson {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
-      'firstName': firstName,
-      'lastName': lastName,
+      'id': id.toMap(),
+      'name': name.toMap(),
       'location': location.toMap(),
       'email': email,
       'gender': gender.name,
@@ -44,9 +41,8 @@ class RandomPerson {
 
   factory RandomPerson.fromMap(Map<String, dynamic> map) {
     return RandomPerson(
-      id: map['id'] as String,
-      firstName: map['firstName'] as String,
-      lastName: map['lastName'] as String,
+      id: PersonId.fromMap(map['id'] as Map<String, dynamic>),
+      name: PersonName.fromMap(map['name'] as Map<String, dynamic>),
       location: Location.fromMap(map['location'] as Map<String, dynamic>),
       email: map['email'] as String,
       gender: Gender.fromJson(map['gender'] as String),
@@ -60,4 +56,49 @@ class RandomPerson {
 
   factory RandomPerson.fromJson(String source) =>
       RandomPerson.fromMap(json.decode(source) as Map<String, dynamic>);
+}
+
+class PersonId {
+  final String name;
+  final String value;
+
+  PersonId({required this.name, required this.value});
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{'name': name, 'value': value};
+  }
+
+  factory PersonId.fromMap(Map<String, dynamic> map) {
+    return PersonId(name: map['name'] as String, value: map['value'] as String);
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory PersonId.fromJson(String source) =>
+      PersonId.fromMap(json.decode(source) as Map<String, dynamic>);
+}
+
+class PersonName {
+  final String title;
+  final String first;
+  final String last;
+
+  PersonName({required this.title, required this.first, required this.last});
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{'title': title, 'first': first, 'last': last};
+  }
+
+  factory PersonName.fromMap(Map<String, dynamic> map) {
+    return PersonName(
+      title: map['title'] as String,
+      first: map['first'] as String,
+      last: map['last'] as String,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory PersonName.fromJson(String source) =>
+      PersonName.fromMap(json.decode(source) as Map<String, dynamic>);
 }

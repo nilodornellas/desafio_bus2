@@ -27,7 +27,7 @@ class Location {
       street: Street.fromMap(map['street'] as Map<String, dynamic>),
       city: map['city'] as String,
       country: map['country'] as String,
-      postCode: map['postCode'] as int,
+      postCode: map['postcode'] as int,
     );
   }
 
@@ -39,7 +39,7 @@ class Location {
 
 class Street {
   final String name;
-  final String number;
+  final int number;
 
   Street({required this.name, required this.number});
 
@@ -48,7 +48,7 @@ class Street {
   }
 
   factory Street.fromMap(Map<String, dynamic> map) {
-    return Street(name: map['name'] as String, number: map['number'] as String);
+    return Street(name: map['name'] as String, number: map['number'] as int);
   }
 
   String toJson() => json.encode(toMap());
