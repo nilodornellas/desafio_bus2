@@ -17,6 +17,7 @@ class SnackbarService {
         backgroundColor: color,
         behavior: SnackBarBehavior.floating,
         duration: const Duration(seconds: 3),
+        showCloseIcon: true,
       ),
     );
   }

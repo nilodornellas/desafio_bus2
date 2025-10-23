@@ -1,7 +1,8 @@
-import 'package:desafio_bus2/pages/random_person_list/person_list_view_model.dart';
+import 'package:desafio_bus2/pages/random_person_list/random_person_list_view_model.dart';
 import 'package:desafio_bus2/pages/random_persisted_people_list/random_persisted_people_list.dart';
 import 'package:desafio_bus2/pages/random_person_detail/random_person_detail_page.dart';
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:provider/provider.dart';
 
@@ -30,7 +31,12 @@ class _RandomPersonListPageState extends State<RandomPersonListPage> {
     return Scaffold(
       appBar: AppBar(title: Text('Lista de Pessoas'), centerTitle: true),
       body: personListViewModel.isLoadingInitial
-          ? Center(child: CircularProgressIndicator())
+          ? Center(
+              child: LoadingAnimationWidget.fourRotatingDots(
+                color: ThemeData().primaryColor,
+                size: 20,
+              ),
+            )
           : ListView.builder(
               itemCount: personListViewModel.people.length,
               itemBuilder: (context, index) {

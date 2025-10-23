@@ -2,6 +2,7 @@ import 'package:desafio_bus2/pages/random_persisted_people_list/ramdom_persisted
 import 'package:desafio_bus2/pages/random_person_detail/random_person_detail_page.dart';
 import 'package:desafio_bus2/presentation/states/empty_state.dart';
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:provider/provider.dart';
 
@@ -55,9 +56,14 @@ class _RandomPersistedPeopleListState extends State<RandomPersistedPeopleList> {
     final viewModel = Provider.of<RamdomPersistedPeopleListViewModel>(context);
 
     return Scaffold(
-      appBar: AppBar(title: Text('Pessoas Salvas'), centerTitle: true),
+      appBar: AppBar(title: Text('Pessoas Persistidas'), centerTitle: true),
       body: viewModel.isInitialLoading
-          ? Center(child: CircularProgressIndicator())
+          ? Center(
+              child: LoadingAnimationWidget.fourRotatingDots(
+                color: ThemeData().primaryColor,
+                size: 12,
+              ),
+            )
           : viewModel.persistedPeople.isEmpty
           ? EmptyState(
               icon: LucideIcons.users,
