@@ -5,6 +5,7 @@ import 'package:desafio_bus2/data/repositories/random_person_repository.dart';
 import 'package:desafio_bus2/data/repositories/random_person_repository_impl.dart';
 import 'package:desafio_bus2/pages/person_list/person_list_page.dart';
 import 'package:desafio_bus2/pages/person_list/person_list_view_model.dart';
+import 'package:desafio_bus2/pages/random_persisted_people_list/ramdom_persisted_people_list_view_model.dart';
 import 'package:desafio_bus2/pages/random_person_detail/random_person_detail_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -32,6 +33,11 @@ void main() async {
         ),
         ChangeNotifierProvider<RandomPersonDetailViewModel>(
           create: (context) => RandomPersonDetailViewModel(
+            repository: context.read<RandomPersonRepository>(),
+          ),
+        ),
+        ChangeNotifierProvider<RamdomPersistedPeopleListViewModel>(
+          create: (context) => RamdomPersistedPeopleListViewModel(
             repository: context.read<RandomPersonRepository>(),
           ),
         ),

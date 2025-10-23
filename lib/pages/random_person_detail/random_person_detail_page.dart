@@ -1,4 +1,5 @@
 import 'package:desafio_bus2/data/models/random_person.dart';
+import 'package:desafio_bus2/pages/random_persisted_people_list/ramdom_persisted_people_list_view_model.dart';
 import 'package:desafio_bus2/pages/random_person_detail/random_person_detail_view_model.dart';
 import 'package:desafio_bus2/pages/random_person_detail/widgets/item_section.dart';
 import 'package:desafio_bus2/pages/random_person_detail/widgets/section_datail_page.dart';
@@ -31,6 +32,8 @@ class _RandomPersonDetailPageState extends State<RandomPersonDetailPage> {
   @override
   Widget build(BuildContext context) {
     final viewModel = Provider.of<RandomPersonDetailViewModel>(context);
+    final randomPersistPeopleListViewModel =
+        Provider.of<RamdomPersistedPeopleListViewModel>(context);
     final primaryColor = Theme.of(context).colorScheme.primary;
 
     return Scaffold(
@@ -43,6 +46,7 @@ class _RandomPersonDetailPageState extends State<RandomPersonDetailPage> {
             child: IconButton(
               onPressed: () async {
                 await viewModel.togglePersonPersistence(widget.person);
+                await randomPersistPeopleListViewModel.loadPersistedPeople();
               },
               icon: Icon(
                 LucideIcons.save,

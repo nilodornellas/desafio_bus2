@@ -1,4 +1,5 @@
 import 'package:desafio_bus2/pages/person_list/person_list_view_model.dart';
+import 'package:desafio_bus2/pages/random_persisted_people_list/random_persisted_people_list.dart';
 import 'package:desafio_bus2/pages/random_person_detail/random_person_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
@@ -27,7 +28,7 @@ class _PersonListPageState extends State<PersonListPage> {
     final personListViewModel = Provider.of<PersonListViewModel>(context);
 
     return Scaffold(
-      appBar: AppBar(title: Text('Lista de Pessoas')),
+      appBar: AppBar(title: Text('Lista de Pessoas'), centerTitle: true),
       body: personListViewModel.isLoadingInitial
           ? Center(child: CircularProgressIndicator())
           : ListView.builder(
@@ -54,7 +55,14 @@ class _PersonListPageState extends State<PersonListPage> {
               },
             ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => RandomPersistedPeopleList(),
+            ),
+          );
+        },
         child: Icon(LucideIcons.database),
       ),
     );

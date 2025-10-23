@@ -16,11 +16,11 @@ class RandomPersonRepositoryImpl implements RandomPersonRepository {
 
   @override
   Future<void> add(RandomPerson randomPerson) async =>
-      await _storage.add(randomPerson: randomPerson, boxName: 'random_persons');
+      await _storage.add(randomPerson: randomPerson, boxName: 'random_people');
 
   @override
   Future<List<RandomPerson>> getAll() async =>
-      await _storage.getAll(boxName: 'random_persons');
+      await _storage.getAll(boxName: 'random_people');
 
   @override
   Future<RandomPerson> getOne() async {
@@ -39,5 +39,5 @@ class RandomPersonRepositoryImpl implements RandomPersonRepository {
 
   @override
   Future<void> remove({required String id}) async =>
-      await _storage.remove(id: id, boxName: 'random_person');
+      await _storage.remove(id: id, boxName: 'random_people');
 }
