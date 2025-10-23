@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Desafio Bus2',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
       home: const RandomPersonListPage(),
     );
