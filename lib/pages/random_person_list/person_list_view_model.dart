@@ -52,7 +52,7 @@ class PersonListViewModel extends ChangeNotifier {
         _people = [..._people, newPerson];
       }
     } catch (e) {
-      // Handle error appropriately, e.g., log or show a message
+      debugPrint('Error fetching person: $e');
     } finally {
       _isFetching = false;
       notifyListeners();

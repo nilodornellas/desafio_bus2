@@ -2,7 +2,7 @@ import 'package:desafio_bus2/data/models/random_person.dart';
 import 'package:desafio_bus2/pages/random_persisted_people_list/ramdom_persisted_people_list_view_model.dart';
 import 'package:desafio_bus2/pages/random_person_detail/random_person_detail_view_model.dart';
 import 'package:desafio_bus2/pages/random_person_detail/widgets/item_section.dart';
-import 'package:desafio_bus2/pages/random_person_detail/widgets/section_datail_page.dart';
+import 'package:desafio_bus2/pages/random_person_detail/widgets/section_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lucide_icons/lucide_icons.dart';
@@ -24,6 +24,7 @@ class _RandomPersonDetailPageState extends State<RandomPersonDetailPage> {
     Future.microtask(() {
       if (!mounted) return;
       context.read<RandomPersonDetailViewModel>().checkIfPersonIsPersisted(
+        context,
         widget.person.login.id,
       );
     });
@@ -45,7 +46,7 @@ class _RandomPersonDetailPageState extends State<RandomPersonDetailPage> {
             visible: !viewModel.isPersisting,
             child: IconButton(
               onPressed: () async {
-                await viewModel.togglePersonPersistence(widget.person);
+                await viewModel.togglePersonPersistence(context, widget.person);
                 await randomPersistPeopleListViewModel.loadPersistedPeople();
               },
               icon: Icon(

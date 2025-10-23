@@ -19,7 +19,7 @@ class _RandomPersistedPeopleListState extends State<RandomPersistedPeopleList> {
     super.initState();
     Future.microtask(() {
       if (!mounted) return;
-      context.read<RamdomPersistedPeopleListViewModel>().init();
+      context.read<RamdomPersistedPeopleListViewModel>().init(context);
     });
   }
 
@@ -73,7 +73,7 @@ class _RandomPersistedPeopleListState extends State<RandomPersistedPeopleList> {
                     return result ?? false;
                   },
                   onDismissed: (direction) {
-                    viewModel.removePerson(person.login.id);
+                    viewModel.removePerson(context, person.login.id);
                   },
                   child: ListTile(
                     leading: CircleAvatar(
