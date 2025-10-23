@@ -35,7 +35,6 @@ class _RandomPersonDetailPageState extends State<RandomPersonDetailPage> {
     final viewModel = Provider.of<RandomPersonDetailViewModel>(context);
     final randomPersistPeopleListViewModel =
         Provider.of<RamdomPersistedPeopleListViewModel>(context);
-    final primaryColor = Theme.of(context).colorScheme.primary;
 
     return Scaffold(
       appBar: AppBar(
@@ -82,35 +81,13 @@ class _RandomPersonDetailPageState extends State<RandomPersonDetailPage> {
                     widget.person.email,
                     style: const TextStyle(color: Colors.grey),
                   ),
-                  const SizedBox(height: 8),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: viewModel.personHasBeenPersisted
-                          ? primaryColor
-                          : null,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 3,
-                    ),
-                    child: Text(
-                      viewModel.personHasBeenPersisted
-                          ? 'Salvo!'
-                          : 'Não Salvo!',
-                      style: TextStyle(
-                        color: viewModel.personHasBeenPersisted
-                            ? Colors.white
-                            : Colors.grey,
-                      ),
-                    ),
-                  ),
                 ],
               ),
             ),
             SizedBox(height: 10),
             SectionDetailPage(
               title: 'Informações Pessoais',
+              icon: LucideIcons.user,
               children: [
                 ItemSection(label: 'Gênero', value: widget.person.gender.label),
                 ItemSection(label: 'Telefone', value: widget.person.phone),
@@ -124,6 +101,7 @@ class _RandomPersonDetailPageState extends State<RandomPersonDetailPage> {
             ),
             SectionDetailPage(
               title: 'Localização',
+              icon: LucideIcons.mapPin,
               children: [
                 ItemSection(
                   label: 'Rua',
@@ -150,6 +128,7 @@ class _RandomPersonDetailPageState extends State<RandomPersonDetailPage> {
             ),
             SectionDetailPage(
               title: 'Login',
+              icon: LucideIcons.lock,
               children: [
                 ItemSection(
                   label: 'Usuário',
@@ -168,6 +147,7 @@ class _RandomPersonDetailPageState extends State<RandomPersonDetailPage> {
             ),
             SectionDetailPage(
               title: 'Datas',
+              icon: LucideIcons.calendarDays,
               children: [
                 ItemSection(
                   label: 'Nascimento',

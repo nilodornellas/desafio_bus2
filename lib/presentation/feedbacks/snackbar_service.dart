@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class SnackbarService {
   static void showSuccess(BuildContext context, String message) {
-    _showSnackBar(context, message, Colors.green);
+    final primaryColor = Theme.of(context).colorScheme.primary;
+    _showSnackBar(context, message, primaryColor);
   }
 
   static void showError(BuildContext context, String message) {

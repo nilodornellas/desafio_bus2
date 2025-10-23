@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:uuid/uuid.dart';
+
 class Id {
   final String? name;
   final String value;
@@ -11,7 +13,10 @@ class Id {
   }
 
   factory Id.fromMap(Map<String, dynamic> map) {
-    return Id(name: map['name'] as String?, value: map['value'] as String);
+    final value = map['value'] == null || map['value'] == ''
+        ? Uuid().v4()
+        : map['value'] as String;
+    return Id(name: map['name'] as String?, value: value);
   }
 
   String toJson() => json.encode(toMap());

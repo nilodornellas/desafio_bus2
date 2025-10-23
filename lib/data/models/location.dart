@@ -5,7 +5,7 @@ class Location {
   final String city;
   final String state;
   final String country;
-  final int postcode;
+  final String postcode;
   final Coordinate coordinates;
   final Timezone timezone;
 
@@ -37,7 +37,7 @@ class Location {
       city: map['city'] as String,
       state: map['state'] as String,
       country: map['country'] as String,
-      postcode: map['postcode'] as int,
+      postcode: map['postcode'].toString(),
       coordinates: Coordinate.fromMap(
         map['coordinates'] as Map<String, dynamic>,
       ),
