@@ -19,7 +19,8 @@ class RandomPersonRepositoryImpl implements RandomPersonRepository {
       await _storage.add(randomPerson: randomPerson, boxName: 'random_persons');
 
   @override
-  List<RandomPerson> getAll() => _storage.getAll(boxName: 'random_persons');
+  Future<List<RandomPerson>> getAll() async =>
+      await _storage.getAll(boxName: 'random_persons');
 
   @override
   Future<RandomPerson> getOne() async {

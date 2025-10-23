@@ -7,6 +7,6 @@ abstract class LocalStorage {
     required String boxName,
   });
   Future<void> remove({required String id, required String boxName});
-  List<RandomPerson> getAll({required String boxName});
+  Future<List<RandomPerson>> getAll({required String boxName});
   Future<void> clear({required String boxName});
 }

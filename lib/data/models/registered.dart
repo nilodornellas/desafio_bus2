@@ -7,7 +7,7 @@ class Registered {
   Registered({required this.date, required this.age});
 
   Map<String, dynamic> toMap() {
-    return <String, dynamic>{'date': date.millisecondsSinceEpoch, 'age': age};
+    return <String, dynamic>{'date': date.toIso8601String(), 'age': age};
   }
 
   factory Registered.fromMap(Map<String, dynamic> map) {

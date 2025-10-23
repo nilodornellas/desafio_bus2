@@ -1,5 +1,5 @@
 import 'package:desafio_bus2/pages/person_list/person_list_view_model.dart';
-import 'package:desafio_bus2/pages/random_person_detail/random_person_detail.dart';
+import 'package:desafio_bus2/pages/random_person_detail/random_person_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:provider/provider.dart';
@@ -46,7 +46,7 @@ class _PersonListPageState extends State<PersonListPage> {
                       context,
                       MaterialPageRoute(
                         builder: (context) =>
-                            RandomPersonDetail(person: person),
+                            RandomPersonDetailPage(person: person),
                       ),
                     );
                   },

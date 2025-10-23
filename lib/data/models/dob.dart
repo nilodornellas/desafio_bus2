@@ -7,7 +7,7 @@ class Dob {
   Dob({required this.date, required this.age});
 
   Map<String, dynamic> toMap() {
-    return <String, dynamic>{'date': date.millisecondsSinceEpoch, 'age': age};
+    return <String, dynamic>{'date': date.toIso8601String(), 'age': age};
   }
 
   factory Dob.fromMap(Map<String, dynamic> map) {

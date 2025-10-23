@@ -21,7 +21,7 @@ class Login {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
+      'uuid': id,
       'username': username,
       'password': password,
       'salt': salt,

@@ -23,24 +23,24 @@ class HiveLocalStorage implements LocalStorage {
     required String boxName,
   }) async {
     final box = await _openBox(boxName);
-    await box.put(randomPerson.id, randomPerson.toJson());
+    await box.put(randomPerson.login.id, randomPerson.toJson());
   }
 
   @override
-  List<RandomPerson> getAll({required String boxName}) {
-    final box = Hive.box(boxName);
+  Future<List<RandomPerson>> getAll({required String boxName}) async {
+    final box = await _openBox(boxName);
     return box.values.map((jsonStr) => RandomPerson.fromJson(jsonStr)).toList();
   }
 
   @override
   Future<void> remove({required String id, required String boxName}) async {
-    final box = Hive.box(boxName);
+    final box = await _openBox(boxName);
     await box.delete(id);
   }
 
   @override
   Future<void> clear({required String boxName}) async {
-    final box = Hive.box(boxName);
+    final box = await _openBox(boxName);
     await box.clear();
   }
 }
