@@ -1,18 +1,18 @@
-import 'package:desafio_bus2/pages/person_list/person_list_view_model.dart';
+import 'package:desafio_bus2/pages/random_person_list/person_list_view_model.dart';
 import 'package:desafio_bus2/pages/random_persisted_people_list/random_persisted_people_list.dart';
 import 'package:desafio_bus2/pages/random_person_detail/random_person_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:provider/provider.dart';
 
-class PersonListPage extends StatefulWidget {
-  const PersonListPage({super.key});
+class RandomPersonListPage extends StatefulWidget {
+  const RandomPersonListPage({super.key});
 
   @override
-  State<PersonListPage> createState() => _PersonListPageState();
+  State<RandomPersonListPage> createState() => _RandomPersonListPageState();
 }
 
-class _PersonListPageState extends State<PersonListPage> {
+class _RandomPersonListPageState extends State<RandomPersonListPage> {
   @override
   void initState() {
     super.initState();
