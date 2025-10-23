@@ -23,6 +23,33 @@ class _RandomPersistedPeopleListState extends State<RandomPersistedPeopleList> {
     });
   }
 
+  Future<bool> showConfirmDialog(
+    BuildContext context, {
+    required String title,
+    required String message,
+    String cancelText = 'Cancelar',
+    String confirmText = 'Remover',
+  }) async {
+    final result = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(title),
+        content: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: Text(cancelText),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: Text(confirmText),
+          ),
+        ],
+      ),
+    );
+    return result ?? false;
+  }
+
   @override
   Widget build(BuildContext context) {
     final viewModel = Provider.of<RamdomPersistedPeopleListViewModel>(context);
@@ -51,26 +78,12 @@ class _RandomPersistedPeopleListState extends State<RandomPersistedPeopleList> {
                     child: const Icon(Icons.delete, color: Colors.white),
                   ),
                   confirmDismiss: (direction) async {
-                    final result = await showDialog<bool>(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                        title: const Text('Confirmar remoção'),
-                        content: Text(
-                          'Deseja realmente remover ${person.name.first}?',
-                        ),
-                        actions: [
-                          TextButton(
-                            onPressed: () => Navigator.of(context).pop(false),
-                            child: const Text('Cancelar'),
-                          ),
-                          TextButton(
-                            onPressed: () => Navigator.of(context).pop(true),
-                            child: const Text('Remover'),
-                          ),
-                        ],
-                      ),
+                    final result = await showConfirmDialog(
+                      context,
+                      title: 'Confirmar remoção',
+                      message: 'Deseja realmente remover ${person.name.first}?',
                     );
-                    return result ?? false;
+                    return result;
                   },
                   onDismissed: (direction) {
                     viewModel.removePerson(context, person.login.id);
@@ -81,7 +94,56 @@ class _RandomPersistedPeopleListState extends State<RandomPersistedPeopleList> {
                     ),
                     title: Text('${person.name.first} ${person.name.last}'),
                     subtitle: Text(person.email),
-                    trailing: const Icon(Icons.arrow_forward_ios, size: 20),
+                    trailing: PopupMenuButton<String>(
+                      icon: const Icon(Icons.more_vert),
+                      onSelected: (value) async {
+                        if (value == 'detail') {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  RandomPersonDetailPage(person: person),
+                            ),
+                          );
+                        } else if (value == 'delete') {
+                          final result = await showConfirmDialog(
+                            context,
+                            title: 'Confirmar remoção',
+                            message:
+                                'Deseja realmente remover ${person.name.first}?',
+                          );
+                          if (result && context.mounted) {
+                            viewModel.removePerson(context, person.login.id);
+                          }
+                        }
+                      },
+                      itemBuilder: (BuildContext context) => [
+                        const PopupMenuItem<String>(
+                          value: 'detail',
+                          child: Row(
+                            children: [
+                              Icon(LucideIcons.plus, size: 18),
+                              SizedBox(width: 8),
+                              Text('Detalhe'),
+                            ],
+                          ),
+                        ),
+                        const PopupMenuItem<String>(
+                          value: 'delete',
+                          child: Row(
+                            children: [
+                              Icon(
+                                LucideIcons.trash,
+                                size: 18,
+                                color: Colors.red,
+                              ),
+                              SizedBox(width: 8),
+                              Text('Remover'),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                     onTap: () {
                       Navigator.push(
                         context,
