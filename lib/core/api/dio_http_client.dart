@@ -1,5 +1,5 @@
 import 'package:desafio_bus2/core/api/http_client.dart';
-import 'package:desafio_bus2/core/api/http_request_exceptions.dart';
+import 'package:desafio_bus2/core/exceptions/http_request_exceptions.dart';
 import 'package:dio/dio.dart';
 
 class DioHttpClient implements HttpClient {

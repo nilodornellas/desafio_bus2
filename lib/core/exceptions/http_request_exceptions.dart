@@ -9,16 +9,16 @@ class HttpRequestException implements Exception {
   factory HttpRequestException.fromDioError(DioException e) {
     switch (e.type) {
       case DioExceptionType.connectionTimeout:
-        return HttpRequestException('Tempo de conexão excedido');
+        return HttpRequestException('Connection timeout');
       case DioExceptionType.receiveTimeout:
-        return HttpRequestException('Tempo de resposta excedido');
+        return HttpRequestException('Response time exceeded');
       case DioExceptionType.badResponse:
         return HttpRequestException(
-          'Erro do servidor: ${e.response?.statusCode}',
+          'Server error: ${e.response?.statusCode}',
           statusCode: e.response?.statusCode,
         );
       default:
-        return HttpRequestException('Erro inesperado: ${e.message}');
+        return HttpRequestException('Unexpected error: ${e.message}');
     }
   }
 
