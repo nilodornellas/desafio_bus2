@@ -1,16 +1,23 @@
-# desafio_bus2
+# 🚌 Desafio Técnico — Bus2
 
-A new Flutter project.
+Este projeto foi desenvolvido como parte de um **desafio técnico da empresa Bus2**, utilizando **Flutter** e **Dart**.  
+O objetivo principal é demonstrar boas práticas de arquitetura e gerenciamento de estado aplicadas a um app simples e funcional.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 📱 Descrição do Aplicativo
 
-A few resources to get you started if this is your first Flutter project:
+O aplicativo exibe **pessoas aleatórias** obtidas de uma API externa.  
+A cada **5 segundos**, uma nova pessoa é carregada automaticamente na tela inicial.  
+O usuário pode:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- 👀 **Visualizar detalhes** completos de uma pessoa.  
+- 💾 **Salvar pessoas favoritas** para consulta posterior.  
+- 🗑️ **Remover pessoas salvas** da lista.  
+- 🔁 **Navegar entre a lista principal** (com as pessoas aleatórias) e a **lista de pessoas salvas**.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
+
+## 🧩 Arquitetura
+
+O projeto segue o padrão **MVVM (Model–View–ViewModel)** em conjunto com o **Repository Pattern**, garantindo uma estrutura modular, testável e de fácil manutenção.
