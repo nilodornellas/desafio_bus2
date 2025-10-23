@@ -12,7 +12,7 @@ class Dob {
 
   factory Dob.fromMap(Map<String, dynamic> map) {
     return Dob(
-      date: DateTime.fromMillisecondsSinceEpoch(map['date'] as int),
+      date: DateTime.parse(map['date'] as String),
       age: map['age'] as int,
     );
   }

@@ -12,7 +12,7 @@ class Registered {
 
   factory Registered.fromMap(Map<String, dynamic> map) {
     return Registered(
-      date: DateTime.fromMillisecondsSinceEpoch(map['date'] as int),
+      date: DateTime.parse(map['date'] as String),
       age: map['age'] as int,
     );
   }

@@ -25,7 +25,7 @@ class PersonListViewModel extends ChangeNotifier {
     try {
       await getRandomPerson();
 
-      _ticker = Ticker(_onTick)..start();
+      // _ticker = Ticker(_onTick)..start();
     } finally {
       _initialLoading = false;
       notifyListeners();

@@ -3,6 +3,7 @@ import 'dart:convert';
 class Location {
   final Street street;
   final String city;
+  final String state;
   final String country;
   final int postCode;
   final Coordinate coordinates;
@@ -11,6 +12,7 @@ class Location {
   Location({
     required this.street,
     required this.city,
+    required this.state,
     required this.country,
     required this.postCode,
     required this.coordinates,
@@ -21,6 +23,7 @@ class Location {
     return <String, dynamic>{
       'street': street.toMap(),
       'city': city,
+      'state': state,
       'country': country,
       'postCode': postCode,
       'coordinates': coordinates.toMap(),
@@ -32,6 +35,7 @@ class Location {
     return Location(
       street: Street.fromMap(map['street'] as Map<String, dynamic>),
       city: map['city'] as String,
+      state: map['state'] as String,
       country: map['country'] as String,
       postCode: map['postcode'] as int,
       coordinates: Coordinate.fromMap(
@@ -68,8 +72,8 @@ class Street {
 }
 
 class Coordinate {
-  final double latitude;
-  final double longitude;
+  final String latitude;
+  final String longitude;
 
   Coordinate({required this.latitude, required this.longitude});
 
@@ -79,8 +83,8 @@ class Coordinate {
 
   factory Coordinate.fromMap(Map<String, dynamic> map) {
     return Coordinate(
-      latitude: map['latitude'] as double,
-      longitude: map['longitude'] as double,
+      latitude: map['latitude'] as String,
+      longitude: map['longitude'] as String,
     );
   }
 
