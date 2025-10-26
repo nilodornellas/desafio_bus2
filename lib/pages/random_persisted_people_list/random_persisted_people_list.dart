@@ -67,7 +67,7 @@ class _RandomPersistedPeopleListState extends State<RandomPersistedPeopleList> {
           : viewModel.persistedPeople.isEmpty
           ? EmptyState(
               icon: LucideIcons.users,
-              message: 'Nenhuma pessoa salva!',
+              message: 'Nenhuma pessoa persistida!',
             )
           : ListView.builder(
               itemCount: viewModel.persistedPeople.length,
